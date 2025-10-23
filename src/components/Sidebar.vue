@@ -51,7 +51,7 @@ const nav = ref([
   },
   {
     title: "Sozlamalar",
-    router: ''
+    router: 'settings'
   },
   {
     title: 'Kalendar',

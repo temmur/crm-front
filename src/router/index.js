@@ -8,7 +8,8 @@ const routes = [
         component: LDefault,
         children: [
             { path: '', component: Dashboard },
-            {path: "news", component: ()=> import('@/views/PNews.vue'), name: 'News'}
+            {path: "news", component: ()=> import('@/views/PNews.vue'), name: 'News'},
+            {path: 'settings', component: ()=> import('@/views/PSettings.vue'), name:'Settings'}
         ]
     }
 ]
