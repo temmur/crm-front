@@ -9,7 +9,8 @@ const routes = [
         children: [
             { path: '', component: Dashboard },
             {path: "news", component: ()=> import('@/views/PNews.vue'), name: 'News'},
-            {path: 'settings', component: ()=> import('@/views/PSettings.vue'), name:'Settings'}
+            {path: 'settings', component: ()=> import('@/views/PSettings.vue'), name:'Settings'},
+            {path: 'map', component: ()=> import('@/views/PMap.vue'), name:'Map'}
         ]
     }
 ]

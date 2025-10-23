@@ -16,6 +16,7 @@
     "@primevue/themes": "^4.4.1",
     "chart.js": "^4.5.1",
     "init": "^0.1.2",
+    "leaflet": "^1.9.4",
     "primeicons": "^7.0.0",
     "primevue": "^4.4.1",
     "vue": "^3.5.22",

@@ -149,10 +149,10 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
     <Button label="Show toast" icon="pi pi-bell" @click="showToast" />
   </div>
   <div class="relative">
-    <div
-        class="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-indigo-100/80 via-transparent to-transparent"
-        aria-hidden="true"
-    />
+<!--    <div-->
+<!--        class="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-indigo-100/80 via-transparent to-transparent"-->
+<!--        aria-hidden="true"-->
+<!--    />-->
   </div>
 
   <div class="mx-auto max-w-6xl p-6! lg:p-8 space-y-8!">

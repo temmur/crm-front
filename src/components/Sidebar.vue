@@ -59,7 +59,7 @@ const nav = ref([
   },
   {
     title: 'Xarita',
-    router: ''
+    router: 'map'
   }
 ])
 </script>
