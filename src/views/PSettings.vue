@@ -1,6 +1,18 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch } from 'vue'
-
+import Button from 'primevue/button'
+import Toast from 'primevue/toast'
+import { useToast } from 'primevue/usetoast'
+import CButton from "@/components/Form/CButton.vue";
+const toast = useToast()
+const showToast = () => {
+  toast.add({
+    severity: 'success',
+    summary: 'Success',
+    detail: 'Aura theme + Toast working!',
+    life: 2500
+  })
+}
 const name = ref('John Doe')
 const email = ref('john@example.com')
 const language = ref<'en'|'ru'|'uz'>('en')
@@ -59,10 +71,26 @@ function resetChanges() {
   password.value = ''
   confirmPassword.value = ''
   avatar.value = null
+
+  // 🔴 Red toast (error style)
+  toast.add({
+    severity: 'error',
+    summary: 'Changes Reset',
+    detail: 'All unsaved changes have been reverted.',
+    life: 3000
+  })
 }
 
 function saveSettings() {
-  if (!validate()) return
+  if (!validate()) {
+    toast.add({
+      severity: 'warn',
+      summary: 'Validation failed',
+      detail: 'Please check required fields',
+      life: 2500
+    })
+    return
+  }
 
   console.log('Settings saved:', {
     name: name.value,
@@ -73,6 +101,7 @@ function saveSettings() {
     twoFactor: twoFactor.value,
   })
 
+  // Save snapshot
   initialSnapshot.name = name.value
   initialSnapshot.email = email.value
   initialSnapshot.language = language.value
@@ -81,6 +110,14 @@ function saveSettings() {
   initialSnapshot.twoFactor = twoFactor.value
   password.value = ''
   confirmPassword.value = ''
+
+  // ✅ Success toast
+  toast.add({
+    severity: 'success',
+    summary: 'Settings saved',
+    detail: 'Your preferences have been updated successfully.',
+    life: 3000
+  })
 }
 
 function onAvatarChange(e: Event) {
@@ -107,7 +144,10 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
 </script>
 
 <template>
-
+  <Toast position="top-right" />   <!-- ✅ host the toast container once -->
+  <div class="p-6!">
+    <Button label="Show toast" icon="pi pi-bell" @click="showToast" />
+  </div>
   <div class="relative">
     <div
         class="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-indigo-100/80 via-transparent to-transparent"
@@ -115,29 +155,38 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
     />
   </div>
 
-  <div class="mx-auto max-w-6xl p-6 lg:p-8 space-y-8">
+  <div class="mx-auto max-w-6xl p-6! lg:p-8 space-y-8!">
 
     <header class="flex items-center justify-between">
       <div>
         <h1 class="text-3xl font-bold tracking-tight text-gray-900">Personal Settings</h1>
-        <p class="mt-1 text-sm text-gray-600">Update your profile, preferences, and security options.</p>
+        <p class="mt-1! text-sm text-gray-600">Update your profile, preferences, and security options.</p>
       </div>
 
 
-      <div class="flex items-center gap-2">
-        <button
-            class="btn-ghost"
-            :disabled="!dirty"
-            @click="resetChanges"
-        >Reset</button>
-        <button
-            class="btn-primary"
-            :class="!dirty && 'opacity-60'"
-            :disabled="!dirty"
-            @click="saveSettings"
-        >
-          Save changes
-        </button>
+      <div class="flex items-center gap-2!">
+<!--        <button-->
+<!--            class="btn-ghost"-->
+<!--            :disabled="!dirty"-->
+<!--            @click="resetChanges"-->
+<!--        >Reset</button>-->
+        <CButton text="Reset" variant="error"
+                 :disabled="!dirty"
+                 @click="resetChanges"
+        />
+        <CButton text="Save changes" variant="light"
+                 :class="!dirty && 'opacity-60'"
+                 :disabled="!dirty"
+                 @click="saveSettings"
+        />
+<!--        <button-->
+<!--            class="btn-primary"-->
+<!--            :class="!dirty && 'opacity-60'"-->
+<!--            :disabled="!dirty"-->
+<!--            @click="saveSettings"-->
+<!--        >-->
+<!--          Save changes-->
+<!--        </button>-->
       </div>
     </header>
 
@@ -145,12 +194,12 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
     <section class="card">
       <div class="card-head">
         <h2 class="card-title">Profile</h2>
-        <p class="card-desc">This information appears on your profile.</p>
+        <p class="card-desc ">This information appears on your profile.</p>
       </div>
 
-      <div class="grid gap-6 md:grid-cols-[180px_1fr] items-start">
+      <div class="grid gap-6! md:grid-cols-[180px_1fr] items-start">
 
-        <div class="space-y-3">
+        <div class="space-y-3!">
           <div class="relative h-36 w-36 overflow-hidden rounded-2xl ring-1 ring-gray-200 bg-gray-50">
             <img
                 v-if="avatar"
@@ -165,7 +214,7 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
                 class="h-full w-full object-cover"
             />
           </div>
-          <label class="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
+          <label class="inline-flex items-center gap-2! rounded-xl border border-gray-200 bg-white px-3! py-1.5! text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0 4 4m-4-4-4 4M20 16.5v1.75A2.75 2.75 0 0 1 17.25 21H6.75A2.75 2.75 0 0 1 4 18.25V16.5"/></svg>
             Upload
             <input type="file" class="hidden" accept="image/*" @change="onAvatarChange">
@@ -173,7 +222,7 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
         </div>
 
 
-        <div class="grid gap-5 sm:grid-cols-2">
+        <div class="grid gap-5! sm:grid-cols-2">
           <label class="fld">
             <span class="fld-label">Full name</span>
             <input v-model.trim="name" type="text" placeholder="Your name" class="input">
@@ -184,7 +233,7 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
             <span v-if="errors.email" class="fld-hint-err">{{ errors.email }}</span>
           </label>
 
-          <div class="sm:col-span-2 grid grid-cols-2 gap-4">
+          <div class="sm:col-span-2 grid grid-cols-2 gap-4!">
             <label class="fld">
               <span class="fld-label">Language</span>
               <select v-model="language" class="select">
@@ -213,10 +262,10 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
     <section class="card">
       <div class="card-head">
         <h2 class="card-title">Preferences</h2>
-        <p class="card-desc">Notifications and UI behavior.</p>
+        <p class="card-desc my-2!">Notifications and UI behavior.</p>
       </div>
 
-      <div class="flex items-center justify-between rounded-xl border border-gray-200 p-4">
+      <div class="flex items-center justify-between rounded-xl border border-gray-200 p-4!">
         <div>
           <h3 class="text-sm font-medium text-gray-900">Enable notifications</h3>
           <p class="text-sm text-gray-500">Receive product updates and important alerts.</p>
@@ -243,9 +292,9 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
 
       <div class="grid gap-5 sm:grid-cols-2">
         <label class="fld">
-          <span class="fld-label">New password</span>
-          <input v-model="password" type="password" placeholder="At least 8 characters" class="input" :class="errors.password && 'ring-red-400'">
-          <div class="mt-2">
+          <span class="fld-label mr-2!">New password</span>
+          <input v-model="password" type="password" placeholder="At least 8 characters" class="input py-2 px-4 border" :class="errors.password && 'ring-red-400'">
+          <div class="mt-2!">
             <div class="h-1.5 w-full overflow-hidden rounded bg-gray-100">
               <div
                   class="h-full transition-all"
@@ -258,19 +307,19 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
                 ]"
               />
             </div>
-            <p class="mt-1 text-xs text-gray-500">{{ strengthLabel }}</p>
+            <p class="mt-1! text-xs text-gray-500">{{ strengthLabel }}</p>
             <span v-if="errors.password" class="fld-hint-err">{{ errors.password }}</span>
           </div>
         </label>
 
         <label class="fld">
-          <span class="fld-label">Confirm password</span>
-          <input v-model="confirmPassword" type="password" placeholder="Repeat new password" class="input" :class="errors.confirm && 'ring-red-400'">
+          <span class="fld-label mr-2!">Confirm password</span>
+          <input v-model="confirmPassword" type="password" placeholder="Repeat new password" class="input py-2! px-4! border" :class="errors.confirm && 'ring-red-400'">
           <span v-if="errors.confirm" class="fld-hint-err">{{ errors.confirm }}</span>
         </label>
       </div>
 
-      <div class="mt-6 flex items-center justify-between rounded-xl border border-gray-200 p-4">
+      <div class="mt-6! flex items-center justify-between rounded-xl border border-gray-200 p-4!">
         <div>
           <h3 class="text-sm font-medium text-gray-900">Two-factor authentication</h3>
           <p class="text-sm text-gray-500">Add an extra layer of security using an authenticator app.</p>
@@ -302,9 +351,9 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
   <transition name="bar">
     <div
         v-if="dirty"
-        class="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4"
+        class="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4!"
     >
-      <div class="flex items-center gap-3 rounded-2xl border bg-white/90 backdrop-blur px-4 py-3 shadow-lg ring-1 ring-black/5">
+      <div class="flex items-center gap-3! rounded-2xl border bg-white/90 backdrop-blur px-4! py-3! shadow-lg ring-1 ring-black/5">
         <span class="text-sm text-gray-700">You have unsaved changes</span>
         <button class="btn-ghost" @click="resetChanges">Reset</button>
         <button class="btn-primary" @click="saveSettings">Save changes</button>
@@ -312,5 +361,10 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
     </div>
   </transition>
 </template>
+<style scoped>
+.card-desc{
+  margin: 10px 0;
+}
+</style>
 
 

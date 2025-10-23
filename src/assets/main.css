@@ -1,2 +1,8 @@
 @import './base.css';
 @import "tailwindcss";
+
+.container{
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}

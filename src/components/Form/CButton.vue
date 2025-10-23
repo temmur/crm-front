@@ -18,7 +18,7 @@ import {DefineProps, computed} from "vue";
 const props = withDefaults(
     defineProps<{
       text: string
-      variant: 'light' | 'dark'
+      variant: 'light' | 'dark' | 'green' | 'error'
       buttonClass: string
       disabled: boolean
       error: boolean
