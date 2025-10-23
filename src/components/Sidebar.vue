@@ -5,19 +5,21 @@
      <p class="text-xl font-bold px-9!">CRM Panel</p>
    </router-link>
     <ul class="space-y-2! bg-gray-900">
-      <li
-          v-for="(item, i) in nav"
-          :key="i"
-          class="p-9! px-9!  cursor-pointer
-               bg-gray-900 text-white font-medium
+
+        <router-link
+            v-for="(item, i) in nav"
+            :key="i"
+            :to="item.router">
+          <li
+              class="p-3! my-9! px-9! cursor-pointer
+               bg-gray-900! text-white font-medium
                transition-all duration-200
-               hover:bg-slate-900 hover:text-whitesmoke
+               hover:bg-slate-800! hover:text-whitesmoke
         rounded-full"
-      >
-        <router-link :to="item.router">
-          {{ item.title }}
+          >
+            {{item.title}}
+          </li>
         </router-link>
-      </li>
     </ul>
   </div>
 
