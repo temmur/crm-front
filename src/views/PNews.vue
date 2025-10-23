@@ -1,0 +1,3 @@
+<template>
+  News page
+</template>

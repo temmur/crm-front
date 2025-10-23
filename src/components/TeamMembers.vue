@@ -1,17 +1,17 @@
 <template>
-  <div class="bg-white rounded-2xl p-6 shadow-md">
-    <div class="flex justify-between items-center mb-4">
+  <div class="bg-white rounded-2xl p-6! shadow-md">
+    <div class="flex justify-between items-center mb-4!">
       <h3 class="text-lg font-semibold text-gray-800">Team Members</h3>
       <button class="text-sm text-sky-500 hover:underline">View All</button>
     </div>
 
-    <div class="space-y-4">
+    <div class="space-y-4!">
       <div
           v-for="(member, index) in members"
           :key="index"
           class="flex justify-between items-center"
       >
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3!">
           <img
               :src="member.avatar"
               alt="avatar"
@@ -24,7 +24,7 @@
         </div>
         <button
             v-if="member.actionText"
-            class="px-3 py-1 text-sm rounded bg-sky-100 text-sky-600"
+            class="px-3! py-1! text-sm rounded bg-sky-100 text-sky-600"
         >
           {{ member.actionText }}
         </button>

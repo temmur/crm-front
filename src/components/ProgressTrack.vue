@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white rounded-2xl p-6 shadow-md">
+  <div class="bg-white rounded-2xl p-6! shadow-md">
     <h3 class="text-lg font-semibold text-gray-700 mb-4">Progress track</h3>
-    <div class="space-y-4">
+    <div class="space-y-4!">
       <div v-for="(item, index) in tracks" :key="index">
-        <div class="flex justify-between text-sm mb-1">
+        <div class="flex justify-between text-sm mb-1!">
           <span class="font-medium text-gray-700">{{ item.name }}</span>
           <span class="text-gray-600">{{ item.progress }}%</span>
         </div>
