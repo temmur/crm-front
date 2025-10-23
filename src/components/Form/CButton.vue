@@ -1,7 +1,7 @@
 <template>
   <button
       :class="[
-      'px-4 py-2 rounded-lg font-semibold focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed',
+      'px-4 py-2 rounded-lg font-semibold focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer',
       buttonClasses,
     ]"
       :disabled="props.disabled"
