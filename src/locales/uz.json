@@ -1,0 +1,22 @@
+{
+  "sidebar": {
+    "tasks": "Vazifalar",
+    "messages": "Xabarlar",
+    "locations": "Joylashuvlar",
+    "settings": "Sozlamalar",
+    "calendar": "Kalendar",
+    "map": "Xarita"
+  },
+  "dashboard": {
+    "customers": "Mijozlar",
+    "revenue": "Daromad",
+    "traffic": "Trafik ulushi",
+    "totalOrders": "Jami buyurtmalar",
+    "team": "Jamoa a’zolari",
+    "progress": "Loyiha holati"
+  },
+  "buttons": {
+    "signIn": "Kirish",
+    "signUp": "Ro‘yxatdan o‘tish"
+  }
+}
