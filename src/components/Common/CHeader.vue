@@ -6,10 +6,10 @@
     </div>
 
     <!-- Right: Buttons -->
-    <div class="flex items-center space-x-4">
+    <div class="flex items-center space-x-4!">
       <CButton text="Sign In" variant="light" @click="goLogin" />
       <CButton text="Sign Up" variant="dark" @click="goRegister" />
-      <div class="p-4">
+      <div class="">
         <CLangSwitcher v-model="selectedLang"
                        :languages="availableLanguages" />
       </div>

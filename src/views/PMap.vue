@@ -4,7 +4,7 @@
     <div class="relative flex-1">
       <!-- Top controls -->
       <div class="absolute z-[1000] top-4 left-1/2 -translate-x-1/2 w-[min(720px,92vw)]">
-        <div class="rounded-2xl shadow-xl bg-white/90 backdrop-blur p-3! border border-gray-100">
+        <div class="rounded-2xl shadow-xl bg-white/90 backdrop-blur p-3 border border-gray-100">
           <div class="flex flex-wrap items-center gap-2">
             <!-- Search -->
             <div class="flex-1 min-w-[220px]">
@@ -13,13 +13,13 @@
                     v-model="query"
                     type="text"
                     placeholder="Search address or place"
-                    class="w-full rounded-xl border border-gray-200 bg-white px-10! py-2.5! outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-500"
+                    class="w-full rounded-xl border border-gray-200 bg-white px-10 py-2.5 outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-500"
                     @input="debouncedSearch"
                 />
                 <i class="pi pi-search absolute left-3 top-1/2 -translate-y-1/2 opacity-60"></i>
                 <button
                     v-if="query"
-                    class="absolute right-2 top-1/2 -translate-y-1/2! p-1.5! rounded-lg hover:bg-gray-100"
+                    class="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-lg hover:bg-gray-100"
                     @click="clearSearch"
                 >
                   <i class="pi pi-times"></i>
@@ -29,12 +29,12 @@
               <!-- Autocomplete -->
               <ul
                   v-if="suggestions.length"
-                  class="mt-2! max-h-56 overflow-auto rounded-xl border border-gray-200 bg-white shadow-lg"
+                  class="mt-2 max-h-56 overflow-auto rounded-xl border border-gray-200 bg-white shadow-lg"
               >
                 <li
                     v-for="s in suggestions"
                     :key="s.place_id"
-                    class="px-3! py-2! hover:bg-gray-50 cursor-pointer text-sm"
+                    class="px-3 py-2 hover:bg-gray-50 cursor-pointer text-sm"
                     @click="goToSuggestion(s)"
                 >
                   {{ s.display_name }}
@@ -43,8 +43,8 @@
             </div>
 
             <!-- Buttons -->
-            <div class="flex items-center gap-2!">
-              <button class="btn" @click="locateMe"><i class="pi pi-compass mr-2!"></i>Locate me</button>
+            <div class="flex items-center gap-2">
+              <button class="btn" @click="locateMe"><i class="pi pi-compass mr-2"></i>Locate me</button>
               <button
                   class="btn"
                   :class="addMode ? 'btn-emerald' : 'btn-white'"
@@ -52,8 +52,8 @@
               >
                 <i class="pi pi-map-marker mr-2"></i>{{ addMode ? 'Click on map to add' : 'Add marker mode' }}
               </button>
-              <button class="btn btn-white" @click="fitAll"><i class="pi pi-arrows-alt mr-2!"></i>Fit</button>
-              <button class="btn btn-danger" @click="clearAll"><i class="pi pi-trash mr-2!"></i>Clear</button>
+              <button class="btn btn-white" @click="fitAll"><i class="pi pi-arrows-alt mr-2"></i>Fit</button>
+              <button class="btn btn-danger" @click="clearAll"><i class="pi pi-trash mr-2"></i>Clear</button>
             </div>
           </div>
         </div>
@@ -65,21 +65,21 @@
 
     <!-- Right: Details panel -->
     <aside class="w-full sm:w-96 border-l border-gray-200 bg-white h-full overflow-auto">
-      <div class="p-4! sm:p-6 space-y-6!">
+      <div class="p-4 sm:p-6 space-y-6">
         <h2 class="text-lg font-semibold">Markers ({{ markers.length }})</h2>
 
         <div
             v-if="!markers.length"
-            class="text-sm text-gray-500 rounded-xl border border-dashed border-gray-300 p-4!"
+            class="text-sm text-gray-500 rounded-xl border border-dashed border-gray-300 p-4"
         >
           No markers yet. Use <b>Add marker mode</b> and click on the map, or search a place.
         </div>
 
-        <ul class="space-y-3!">
+        <ul class="space-y-3">
           <li
               v-for="m in markers"
               :key="m.id"
-              class="flex items-start justify-between rounded-xl border border-gray-200 p-3! hover:shadow-sm"
+              class="flex items-start justify-between rounded-xl border border-gray-200 p-3 hover:shadow-sm"
           >
             <div class="text-sm">
               <div class="font-medium">{{ m.title || 'Marker' }}</div>
@@ -92,12 +92,12 @@
           </li>
         </ul>
 
-        <div v-if="markers.length >= 2" class="pt-4! border-t border-gray-200">
+        <div v-if="markers.length >= 2" class="pt-4 border-t border-gray-200">
           <h3 class="text-sm font-semibold mb-2">Quick measure</h3>
           <p class="text-sm text-gray-600">
             Distance between the last two markers:
           </p>
-          <div class="mt-2! text-base font-semibold">
+          <div class="mt-2 text-base font-semibold">
             {{ prettyKm(distanceBetweenLastTwo) }}
           </div>
         </div>
@@ -108,11 +108,10 @@
 
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref, reactive, computed } from 'vue'
-import type { Ref } from 'vue'
 import 'primeicons/primeicons.css'
 
-// Lazy-loaded Leaflet to avoid SSR/build hiccups
-let L: typeof import('leaflet') | null = null
+// Leaflet will be lazy-loaded to avoid SSR/build hiccups
+let L: any = null
 
 type Place = {
   place_id: number
@@ -126,11 +125,11 @@ type UIMarker = {
   lat: number
   lng: number
   title?: string
-  lf?: import('leaflet').Marker
+  lf?: any
 }
 
 const mapEl = ref<HTMLDivElement | null>(null)
-const map = ref<import('leaflet').Map | null>(null)
+const map = ref<any | null>(null)
 const markers = reactive<UIMarker[]>([])
 
 const addMode = ref(false)
@@ -155,7 +154,7 @@ async function runSearch() {
         query.value
     )}`
     const res = await fetch(url, { headers: { 'Accept-Language': 'en' } })
-    const data: Place[] = await res.json()
+    const data = await res.json()
     suggestions.value = data.slice(0, 8)
   } catch (e) {
     console.error('Search failed', e)
@@ -181,7 +180,7 @@ onMounted(async () => {
   if (!mapEl.value) return
 
   map.value = m.map(mapEl.value, {
-    center: [39.774, 64.428], // Bukhara-ish default; change if you like
+    center: [41.3111, 69.2797], // default to Tashkent
     zoom: 12,
     zoomControl: true
   })
@@ -194,6 +193,11 @@ onMounted(async () => {
       })
       .addTo(map.value)
 
+  // ensure map is rendered correctly (fix for hidden/animated containers)
+  setTimeout(() => {
+    map.value.invalidateSize?.()
+  }, 100)
+
   map.value.on('click', (ev: any) => {
     if (!addMode.value) return
     const { lat, lng } = ev.latlng
@@ -202,7 +206,7 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
-  map.value?.remove()
+  map.value?.remove?.()
 })
 
 // --- Marker helpers ---
@@ -235,13 +239,13 @@ function removeMarker(id: string) {
 }
 
 function flyTo(m: UIMarker) {
-  map.value?.flyTo([m.lat, m.lng], Math.max(map.value?.getZoom() ?? 13, 15))
+  map.value?.flyTo([m.lat, m.lng], Math.max(map.value?.getZoom?.() ?? 13, 15))
   m.lf?.openPopup()
 }
 
 function fitAll() {
   if (!map.value || !L || markers.length === 0) return
-  const bounds = L.latLngBounds(markers.map(m => [m.lat, m.lng]) as any)
+  const bounds = L.latLngBounds(markers.map(m => [m.lat, m.lng]))
   map.value.fitBounds(bounds, { padding: [40, 40] })
 }
 
@@ -299,13 +303,22 @@ function prettyKm(meters: number) {
 async function ensureLeaflet() {
   if (L) return L
   const mod = await import('leaflet')
-  L = mod.default || (mod as any)
+  L = mod.default || mod
 
-  // Fix default marker icons in bundlers
-  const iconRetinaUrl = new URL('leaflet/dist/images/marker-icon-2x.png', import.meta.url).toString()
-  const iconUrl = new URL('leaflet/dist/images/marker-icon.png', import.meta.url).toString()
-  const shadowUrl = new URL('leaflet/dist/images/marker-shadow.png', import.meta.url).toString()
-  L.Icon.Default.mergeOptions({ iconRetinaUrl, iconUrl, shadowUrl })
+  // load CSS (important)
+  await import('leaflet/dist/leaflet.css')
+
+  // Fix default marker icons in bundlers (Vite)
+  try {
+    const iconRetinaUrl = new URL('leaflet/dist/images/marker-icon-2x.png', import.meta.url).toString()
+    const iconUrl = new URL('leaflet/dist/images/marker-icon.png', import.meta.url).toString()
+    const shadowUrl = new URL('leaflet/dist/images/marker-shadow.png', import.meta.url).toString()
+    L.Icon.Default.mergeOptions({ iconRetinaUrl, iconUrl, shadowUrl })
+  } catch (e) {
+    // ignore if URL construction fails in some environments
+    console.warn('Could not set leaflet icon URLs statically', e)
+  }
+
   return L
 }
 
@@ -320,5 +333,32 @@ function cryptoRandom() {
 </script>
 
 <style scoped>
-
+/* Minimal helper classes when not using @apply or if Tailwind utilities are missing */
+.btn {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.btn-white {
+  background: white;
+}
+.btn-emerald {
+  background: #10b981;
+  color: white;
+}
+.btn-danger {
+  background: #ef4444;
+  color: white;
+}
+.iconbtn {
+  padding: 0.375rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+.iconbtn.danger {
+  color: #ef4444;
+}
 </style>
+
