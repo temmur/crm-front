@@ -1,0 +1,22 @@
+{
+  "sidebar": {
+    "tasks": "Задачи",
+    "messages": "Сообщения",
+    "locations": "Локации",
+    "settings": "Настройки",
+    "calendar": "Календарь",
+    "map": "Карта"
+  },
+  "dashboard": {
+    "customers": "Клиенты",
+    "revenue": "Доход",
+    "traffic": "Доля трафика",
+    "totalOrders": "Всего заказов",
+    "team": "Члены команды",
+    "progress": "Ход проектов"
+  },
+  "buttons": {
+    "signIn": "Войти",
+    "signUp": "Регистрация"
+  }
+}
