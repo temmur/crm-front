@@ -7,8 +7,8 @@
 
     <!-- Right: Buttons -->
     <div class="flex items-center space-x-4">
-      <CButton text="Sign In" variant="light" button-class="mr-2!"/>
-      <CButton text="Sign Up" variant="dark"/>
+      <CButton text="Sign In" variant="light" @click="goLogin" />
+      <CButton text="Sign Up" variant="dark" @click="goRegister" />
       <div class="p-4">
         <CLangSwitcher v-model="selectedLang"
                        :languages="availableLanguages" />
@@ -16,13 +16,24 @@
     </div>
   </header>
 </template>
+
 <script setup lang="ts">
-import CButton from "@/components/Form/CButton.vue";
-import CSearch from "@/components/Form/CSearch.vue";
-import CLangSwitcher from "@/components/UI/CLangSwitcher.vue";
-import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import CLangSwitcher from '@/components/UI/CLangSwitcher.vue'
+import CButton from '@/components/Form/CButton.vue'
+import CSearch from '@/components/Form/CSearch.vue'
+const router = useRouter()
 
 import {ref} from "vue";
+const goLogin = () => {
+  router.push('/login')
+}
+
+const goRegister = () => {
+  router.push('/register')
+}
+import { useI18n } from 'vue-i18n'
+
 
 const selectedLang = ref(localStorage.getItem('locale') || 'en')
 
