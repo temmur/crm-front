@@ -1,3 +1,4 @@
+<!-- src/components/Button.vue -->
 <template>
   <button
       :class="[
@@ -5,15 +6,16 @@
       buttonClasses,
     ]"
       :disabled="props.disabled"
+      @click="$emit('click')"
   >
     <slot name="prefix"></slot>
-    {{text}}
+    {{ text }}
     <slot name="suffix"></slot>
   </button>
 </template>
 
 <script setup lang="ts">
-import {DefineProps, computed} from "vue";
+import { computed } from 'vue'
 
 const props = withDefaults(
     defineProps<{
@@ -31,6 +33,7 @@ const props = withDefaults(
       error: false,
     }
 )
+
 const variants = {
   light:
       'bg-white text-gray-900 border border-gray-300 hover:bg-gray-100 active:bg-gray-200 transition',
@@ -39,11 +42,9 @@ const variants = {
   error:
       'bg-red-500 text-white hover:bg-red-600 active:bg-red-700 border border-red-600 transition',
 }
+
 const buttonClasses = computed(() => {
   if (props.error) return variants.error
   return variants[props.variant] + ' ' + props.buttonClass
 })
 </script>
-
-<style scoped>
-</style>
