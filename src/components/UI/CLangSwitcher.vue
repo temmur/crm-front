@@ -2,7 +2,7 @@
   <div class="relative inline-block text-left">
     <button
         @click="toggleDropdown"
-        class="inline-flex cursor-pointer justify-center w-full px-4 py-2 text-sm font-medium bg-gray-900 text-white border border-gray-700 hover:bg-gray-800 active:bg-black transition rounded-md focus:outline-none"
+        class="inline-flex cursor-pointer justify-center w-full px-4! py-2! text-sm font-medium bg-gray-900 text-white border border-gray-700 hover:bg-gray-800 active:bg-black transition rounded-md focus:outline-none"
     >
       {{ currentLabel }}
       <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
