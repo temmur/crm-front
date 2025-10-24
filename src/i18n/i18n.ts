@@ -1,11 +1,13 @@
 // src/i18n/i18n.ts
 import { createI18n } from 'vue-i18n'
+import en from '@/locales/en.json'
+import uz from '@/locales/uz.json'
+import ru from '@/locales/ru.json'
 
 const messages = {
-    en: { welcome: 'Welcome', language: 'Language' },
-    es: { welcome: 'Bienvenido', language: 'Idioma' },
-    fr: { welcome: 'Bienvenue', language: 'Langue' },
-    de: { welcome: 'Willkommen', language: 'Sprache' },
+    en: en,
+    uz: uz,
+    ru: ru,
 }
 
 const defaultLocale = 'en'
