@@ -11,6 +11,10 @@ import 'primeicons/primeicons.css'
 import i18n from "@/i18n/i18n.js";
 // createApp(App).use(router).use(PrimeVue).mount('#app')
 
+// ✅ Mask uchun import
+import { vMaska } from 'maska/vue'
+
+
 const app = createApp(App)
 
 app.use(router)
@@ -20,5 +24,10 @@ app.use(PrimeVue, {
     }
 })
 app.use(ToastService)
+
+// ✅ Maskani global directive sifatida ro‘yxatga olamiz
+app.directive('maska', vMaska)
+
+// === App’ni ishga tushiramiz ===
 app.use(i18n)
 app.mount('#app')
