@@ -1,0 +1,22 @@
+{
+  "sidebar": {
+    "tasks": "Tasks",
+    "messages": "Messages",
+    "locations": "Locations",
+    "settings": "Settings",
+    "calendar": "Calendar",
+    "map": "Map"
+  },
+  "dashboard": {
+    "customers": "Customers",
+    "revenue": "Revenue",
+    "traffic": "Traffic Share",
+    "totalOrders": "Total Orders",
+    "team": "Team Members",
+    "progress": "Progress Track"
+  },
+  "buttons": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  }
+}
