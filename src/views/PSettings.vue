@@ -224,12 +224,15 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
 
         <div class="grid gap-5! sm:grid-cols-2">
           <label class="fld">
-            <span class="fld-label">Full name</span>
-            <input v-model.trim="name" type="text" placeholder="Your name" class="input">
+            <span class="fld-label mr-2!">Full name</span>
+            <input v-model.trim="name" type="text" placeholder="Your name"
+                   class="input  py-2! px-4! border border-gray-300">
           </label>
           <label class="fld">
-            <span class="fld-label">Email</span>
-            <input v-model.trim="email" type="email" placeholder="you@example.com" class="input" :class="errors.email && 'ring-red-400'">
+            <span class="fld-label mr-2!">Email</span>
+            <input v-model.trim="email" type="email" placeholder="you@example.com"
+                   class="input  py-2! px-4! border border-gray-300"
+                   :class="errors.email && 'ring-red-400'">
             <span v-if="errors.email" class="fld-hint-err">{{ errors.email }}</span>
           </label>
 
@@ -293,7 +296,10 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
       <div class="grid gap-5 sm:grid-cols-2">
         <label class="fld">
           <span class="fld-label mr-2!">New password</span>
-          <input v-model="password" type="password" placeholder="At least 8 characters" class="input py-2 px-4 border" :class="errors.password && 'ring-red-400'">
+          <input v-model="password" type="password"
+                 placeholder="At least 8 characters"
+                 class="input py-2 px-4 border border-gray-300"
+                 :class="errors.password && 'ring-red-400'">
           <div class="mt-2!">
             <div class="h-1.5 w-full overflow-hidden rounded bg-gray-100">
               <div
@@ -314,7 +320,11 @@ const themeDotClass = computed(() => theme.value === 'dark' ? 'bg-gray-900' : 'b
 
         <label class="fld">
           <span class="fld-label mr-2!">Confirm password</span>
-          <input v-model="confirmPassword" type="password" placeholder="Repeat new password" class="input py-2! px-4! border" :class="errors.confirm && 'ring-red-400'">
+          <input v-model="confirmPassword"
+                 type="password"
+                 placeholder="Repeat new password"
+                 class="input py-2! px-4! border border-gray-300"
+                 :class="errors.confirm && 'ring-red-400'">
           <span v-if="errors.confirm" class="fld-hint-err">{{ errors.confirm }}</span>
         </label>
       </div>
