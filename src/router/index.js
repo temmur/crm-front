@@ -13,6 +13,8 @@ const routes = [
             { path: 'news', component: () => import('@/views/PNews.vue'), name: 'News' },
             { path: 'settings', component: () => import('@/views/PSettings.vue'), name: 'Settings' },
             { path: 'map', component: () => import('@/views/PMap.vue'), name: 'Map' },
+            {path: 'calendar',component: () => import('@/views/Calendar.vue'), name: 'Calendar' },
+
         ],
     },
 
@@ -27,6 +29,7 @@ const routes = [
         name: 'Register',
         component: () => import('@/views/Register.vue'),
     },
+
 
     // 🔹 404 sahifa (ixtiyoriy)
     {
